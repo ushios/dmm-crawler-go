@@ -29,3 +29,7 @@ jobs:
           name: build docker image
           command: |
             docker-compose build
+      - run:
+          name : running test on docker
+          command: |
+            docker-compose run app go test ./...

@@ -11,6 +11,3 @@ RUN apk add --no-cache --virtual .goget \
 	git && \
 	go get ./... && \
 	apk del .goget
-
-
-CMD ["go", "test", "./..."]
