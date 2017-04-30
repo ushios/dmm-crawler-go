@@ -1,15 +1,26 @@
 package clawrer
 
-import dmm "github.com/dmmlabo/dmm-go-sdk"
+import (
+	dmm "github.com/dmmlabo/dmm-go-sdk"
+	"github.com/dmmlabo/dmm-go-sdk/api"
+)
 
-// Actress _
-type Actress struct {
-	client *dmm.Client
-}
+const (
+	// APILengthMax is max size of length
+	APILengthMax = 100
+)
 
-// NewActress _
-func NewActress(c *dmm.Client) *Actress {
-	return &Actress{
-		client: c,
-	}
+// AllActresses _
+// func AllActresses(ctx context.Context, c *dmm.Client) (chan api.Actress, chan error) {
+//
+// }
+
+// PartOfActresses _
+func PartOfActresses(c *dmm.Client, page int64) (*api.ActressResponse, error) {
+	api := c.Actress
+	api.SetSort("id")
+	api.SetLength(APILengthMax)
+	api.SetOffset(page)
+
+	return api.Execute()
 }
