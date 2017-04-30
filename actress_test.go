@@ -1,6 +1,7 @@
 package clawrer
 
 import (
+	"os"
 	"testing"
 	"time"
 
@@ -9,9 +10,17 @@ import (
 )
 
 const (
-	TestApiID       = ""
-	TestAffiliateID = ""
+	TestAPIIDEnvKey       = "TEST_DMM_API_ID"
+	TestAffiliateIDEnvKey = "TEST_DMM_AFFILIATE_ID"
 )
+
+func ApiID() string {
+	return os.Getenv(TestAPIIDEnvKey)
+}
+
+func AffiliateID() string {
+	return os.Getenv(TestAffiliateIDEnvKey)
+}
 
 func TestAllActresses(t *testing.T) {
 	table := []struct {
@@ -20,7 +29,7 @@ func TestAllActresses(t *testing.T) {
 		interval    time.Duration
 		maxRepeat   int
 	}{
-		{TestApiID, TestAffiliateID, 10 * time.Millisecond, 2},
+		{ApiID(), AffiliateID(), 10 * time.Millisecond, 2},
 	}
 
 	for _, d := range table {
@@ -57,7 +66,7 @@ func TestActressList(t *testing.T) {
 		affiliateID string
 		page        int64
 	}{
-		{TestApiID, TestAffiliateID, 0},
+		{ApiID(), AffiliateID(), 0},
 	}
 
 	for _, d := range table {
