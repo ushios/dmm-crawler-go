@@ -2,14 +2,54 @@ package clawrer
 
 import (
 	"testing"
+	"time"
 
 	dmm "github.com/dmmlabo/dmm-go-sdk"
+	"github.com/dmmlabo/dmm-go-sdk/api"
 )
 
 const (
-	TestApiID       = "PVNKaRNVkvQbatzKa7Q5"
-	TestAffiliateID = "FDGdnq4T6rvz-990"
+	TestApiID       = ""
+	TestAffiliateID = ""
 )
+
+func TestAllActresses(t *testing.T) {
+	table := []struct {
+		apiID       string
+		affiliateID string
+		interval    time.Duration
+		maxRepeat   int
+	}{
+		{TestApiID, TestAffiliateID, 10 * time.Millisecond, 2},
+	}
+
+	for _, d := range table {
+		c := dmm.New(d.affiliateID, d.apiID)
+		o := Option{
+			Interval:  d.interval,
+			MaxRepeat: d.maxRepeat,
+		}
+
+		list := []api.Actress{}
+		actressChan, doneChan, errChan := AllActresses(c, o)
+	ACTRESS:
+		for {
+			select {
+			case err := <-errChan:
+				t.Fatalf("clawrer.AllActresses got error: %s", err)
+			case actress := <-actressChan:
+				list = append(list, actress)
+			case <-doneChan:
+				break ACTRESS
+			}
+		}
+
+		if len(list) != d.maxRepeat*APILengthMax {
+			t.Errorf("list length expected (%d) but (%d)", d.maxRepeat*APILengthMax, len(list))
+		}
+
+	}
+}
 
 func TestActressList(t *testing.T) {
 	table := []struct {
