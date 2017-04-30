@@ -15,8 +15,8 @@ const (
 //
 // }
 
-// PartOfActresses _
-func PartOfActresses(c *dmm.Client, page int64) (*api.ActressResponse, error) {
+// ActressList _
+func ActressList(c *dmm.Client, page int64) (*api.ActressResponse, error) {
 	api := c.Actress
 	api.SetSort("id")
 	api.SetLength(APILengthMax)
