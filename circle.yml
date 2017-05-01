@@ -28,7 +28,8 @@ jobs:
       - run:
           name: build docker image
           command: |
-            ls -la
             docker-compose build
-            docker images
-            docker-compose run app go test ./...
+      # - run:
+      #     name: run test
+      #     command: |
+      #       docker-compose run app go test ./...

@@ -9,5 +9,5 @@ WORKDIR ${APP_PATH}
 
 RUN apk add --no-cache --virtual .goget \
 	git && \
-	go get ./... && \
+	go get -v ./... && \
 	apk del .goget
