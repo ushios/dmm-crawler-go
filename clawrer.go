@@ -2,9 +2,10 @@ package clawrer
 
 import "time"
 
-// Clawrer _
-type Clawrer struct {
-}
+const (
+	// APILengthMax is max size of length
+	APILengthMax = 100
+)
 
 type (
 	// Option is clawrer options

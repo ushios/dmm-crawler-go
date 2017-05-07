@@ -7,7 +7,7 @@ const (
 	TestAffiliateIDEnvKey = "TEST_DMM_AFFILIATE_ID"
 )
 
-func ApiID() string {
+func APIID() string {
 	return os.Getenv(TestAPIIDEnvKey)
 }
 

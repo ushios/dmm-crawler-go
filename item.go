@@ -8,12 +8,12 @@ import (
 	"github.com/dmmlabo/dmm-go-sdk/api"
 )
 
-// AllActresses _　TODO: using context.Context
-func AllActresses(
+// AllItems _　TODO: using context.Context
+func AllItems(
 	c *dmm.Client, o Option,
-	fn func(*dmm.Client, int64) (*api.ActressResponse, error),
-) (chan api.Actress, chan struct{}, chan error) {
-	actressChan := make(chan api.Actress, 100)
+	fn func(*dmm.Client, int64) (*api.ProductResponse, error),
+) (chan api.Item, chan struct{}, chan error) {
+	actressChan := make(chan api.Item, 100)
 	errChan := make(chan error)
 	doneChan := make(chan struct{}, 1)
 
@@ -30,7 +30,7 @@ func AllActresses(
 				return
 			}
 
-			l := res.Actresses
+			l := res.Items
 
 			if len(l) == 0 {
 				return
@@ -55,12 +55,15 @@ func AllActresses(
 	return actressChan, doneChan, errChan
 }
 
-// ActressResponse get api response.
-func ActressResponse(c *dmm.Client, page int64) (*api.ActressResponse, error) {
-	api := c.Actress
-	api.SetSort("id")
+// AdultVideoItemResponse get adult video items.
+func AdultVideoItemResponse(c *dmm.Client, page int64) (*api.ProductResponse, error) {
+	api := c.Product
+	api.SetSort("date")
 	api.SetLength(APILengthMax)
 	api.SetOffset(page)
+	api.SetSite("DMM.R18")
+	api.SetFloor("videoa")
+	api.SetService("digital")
 
 	return api.Execute()
 }
