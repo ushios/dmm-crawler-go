@@ -66,8 +66,3 @@ func ActressResponse(c *dmm.Client, page int64) (*api.ActressResponse, error) {
 
 	return api.Execute()
 }
-
-// ActressFromResponse get actresses from response.
-func ActressFromResponse(res *api.ActressResponse) []api.Actress {
-	return res.Actresses
-}
