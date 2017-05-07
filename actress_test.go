@@ -1,26 +1,12 @@
 package clawrer
 
 import (
-	"os"
 	"testing"
 	"time"
 
 	dmm "github.com/dmmlabo/dmm-go-sdk"
 	"github.com/dmmlabo/dmm-go-sdk/api"
 )
-
-const (
-	TestAPIIDEnvKey       = "TEST_DMM_API_ID"
-	TestAffiliateIDEnvKey = "TEST_DMM_AFFILIATE_ID"
-)
-
-func ApiID() string {
-	return os.Getenv(TestAPIIDEnvKey)
-}
-
-func AffiliateID() string {
-	return os.Getenv(TestAffiliateIDEnvKey)
-}
 
 func TestAllActresses(t *testing.T) {
 	table := []struct {
