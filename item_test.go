@@ -8,7 +8,7 @@ import (
 	"github.com/dmmlabo/dmm-go-sdk/api"
 )
 
-func TestAllActresses(t *testing.T) {
+func TestAllProduct(t *testing.T) {
 	table := []struct {
 		apiID       string
 		affiliateID string
@@ -25,17 +25,17 @@ func TestAllActresses(t *testing.T) {
 			MaxRepeat: d.maxRepeat,
 		}
 
-		list := []api.Actress{}
-		actressChan, doneChan, errChan := AllActresses(c, o, ActressResponse)
-	ACTRESS:
+		list := []api.Item{}
+		itemChan, doneChan, errChan := AllItems(c, o, AdultVideoItemResponse)
+	Product:
 		for {
 			select {
 			case err := <-errChan:
 				t.Fatalf("clawrer.AllActresses got error: %s", err)
-			case actress := <-actressChan:
-				list = append(list, actress)
+			case item := <-itemChan:
+				list = append(list, item)
 			case <-doneChan:
-				break ACTRESS
+				break Product
 			}
 		}
 
@@ -46,7 +46,7 @@ func TestAllActresses(t *testing.T) {
 	}
 }
 
-func TestActressResponse(t *testing.T) {
+func TestAdultVideoItemResponse(t *testing.T) {
 	table := []struct {
 		apiID       string
 		affiliateID string
@@ -57,13 +57,13 @@ func TestActressResponse(t *testing.T) {
 
 	for _, d := range table {
 		c := dmm.New(d.affiliateID, d.apiID)
-		res, err := ActressResponse(c, d.page)
+		res, err := AdultVideoItemResponse(c, d.page)
 		if err != nil {
 			t.Errorf("ActressList got error: %s", err)
 		}
 
-		if len(res.Actresses) != APILengthMax {
-			t.Errorf("res.Actresses length expected (%d) but (%d)", APILengthMax, len(res.Actresses))
+		if len(res.Items) != APILengthMax {
+			t.Errorf("res.Items length expected (%d) but (%d)", APILengthMax, len(res.Items))
 		}
 	}
 }
