@@ -26,7 +26,7 @@ func TestAllActresses(t *testing.T) {
 		}
 
 		list := []api.Actress{}
-		actressChan, doneChan, errChan := AllActresses(c, o)
+		actressChan, doneChan, errChan := AllActresses(c, o, ActressResponse)
 	ACTRESS:
 		for {
 			select {
