@@ -60,7 +60,7 @@ func TestAllActresses(t *testing.T) {
 	}
 }
 
-func TestActressList(t *testing.T) {
+func TestActressResponse(t *testing.T) {
 	table := []struct {
 		apiID       string
 		affiliateID string
@@ -71,7 +71,7 @@ func TestActressList(t *testing.T) {
 
 	for _, d := range table {
 		c := dmm.New(d.affiliateID, d.apiID)
-		res, err := ActressList(c, d.page)
+		res, err := ActressResponse(c, d.page)
 		if err != nil {
 			t.Errorf("ActressList got error: %s", err)
 		}

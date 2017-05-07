@@ -13,14 +13,6 @@ const (
 	APILengthMax = 100
 )
 
-type (
-	// Option is clawrer options
-	Option struct {
-		Interval  time.Duration
-		MaxRepeat int
-	}
-)
-
 // AllActresses _　TODO: using context.Context
 func AllActresses(c *dmm.Client, o Option) (chan api.Actress, chan struct{}, chan error) {
 	actressChan := make(chan api.Actress, 100)
@@ -34,9 +26,9 @@ func AllActresses(c *dmm.Client, o Option) (chan api.Actress, chan struct{}, cha
 
 		var page int64
 		for {
-			res, err := ActressList(c, page)
+			res, err := ActressResponse(c, page)
 			if err != nil {
-				errChan <- fmt.Errorf("clawrer ActressList gor error: %s", err)
+				errChan <- fmt.Errorf("clawrer ActressResponse gor error: %s", err)
 				return
 			}
 
@@ -65,12 +57,17 @@ func AllActresses(c *dmm.Client, o Option) (chan api.Actress, chan struct{}, cha
 	return actressChan, doneChan, errChan
 }
 
-// ActressList _
-func ActressList(c *dmm.Client, page int64) (*api.ActressResponse, error) {
+// ActressResponse get api response.
+func ActressResponse(c *dmm.Client, page int64) (*api.ActressResponse, error) {
 	api := c.Actress
 	api.SetSort("id")
 	api.SetLength(APILengthMax)
 	api.SetOffset(page)
 
 	return api.Execute()
+}
+
+// ActressFromResponse get actresses from response.
+func ActressFromResponse(res *api.ActressResponse) []api.Actress {
+	return res.Actresses
 }
