@@ -1,4 +1,4 @@
-package clawrer
+package crawler
 
 import "os"
 

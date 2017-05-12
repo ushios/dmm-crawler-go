@@ -1,4 +1,4 @@
-package clawrer
+package crawler
 
 import (
 	"testing"
@@ -31,7 +31,7 @@ func TestAllProduct(t *testing.T) {
 		for {
 			select {
 			case err := <-errChan:
-				t.Fatalf("clawrer.AllActresses got error: %s", err)
+				t.Fatalf("crawler.AllActresses got error: %s", err)
 			case item := <-itemChan:
 				list = append(list, item)
 			case <-doneChan:

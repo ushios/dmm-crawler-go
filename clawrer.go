@@ -1,4 +1,4 @@
-package clawrer
+package crawler
 
 import "time"
 
@@ -8,7 +8,7 @@ const (
 )
 
 type (
-	// Option is clawrer options
+	// Option is crawler options
 	Option struct {
 		Interval  time.Duration
 		MaxRepeat int
