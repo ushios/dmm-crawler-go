@@ -60,7 +60,7 @@ func AdultVideoItemResponse(c *dmm.Client, page int64) (*api.ProductResponse, er
 	api := c.Product
 	api.SetSort("date")
 	api.SetLength(APILengthMax)
-	api.SetOffset(page)
+	api.SetOffset(page*APILengthMax + 1) // TODO: what is +1
 	api.SetSite("DMM.R18")
 	api.SetFloor("videoa")
 	api.SetService("digital")

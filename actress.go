@@ -60,7 +60,7 @@ func ActressResponse(c *dmm.Client, page int64) (*api.ActressResponse, error) {
 	api := c.Actress
 	api.SetSort("id")
 	api.SetLength(APILengthMax)
-	api.SetOffset(page)
+	api.SetOffset(page*APILengthMax + 1) // TODO: what is +1
 
 	return api.Execute()
 }
