@@ -1,4 +1,4 @@
-package clawrer
+package crawler
 
 import (
 	"fmt"
@@ -26,7 +26,7 @@ func AllActresses(
 		for {
 			res, err := fn(c, page)
 			if err != nil {
-				errChan <- fmt.Errorf("clawrer ActressResponse gor error: %s", err)
+				errChan <- fmt.Errorf("crawler ActressResponse gor error: %s", err)
 				return
 			}
 
