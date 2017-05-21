@@ -1,7 +1,6 @@
 package crawler
 
 import (
-	"fmt"
 	"testing"
 	"time"
 
@@ -36,7 +35,6 @@ func TestAllActresses(t *testing.T) {
 				t.Fatalf("crawler.AllActresses got error: %s", err)
 			case actress := <-actressChan:
 				list = append(list, actress)
-				fmt.Println(actress.ID)
 				if val, ok := idMap[actress.ID]; ok {
 					if val {
 						t.Fatalf("ID %s already got", actress.ID)
