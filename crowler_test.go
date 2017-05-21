@@ -3,8 +3,8 @@ package crawler
 import "os"
 
 const (
-	TestAPIIDEnvKey       = "TEST_DMM_API_ID"
-	TestAffiliateIDEnvKey = "TEST_DMM_AFFILIATE_ID"
+	TestAPIIDEnvKey       = "DMM_TEST_API_ID"
+	TestAffiliateIDEnvKey = "DMM_TEST_AFFILIATE_ID"
 )
 
 func APIID() string {
